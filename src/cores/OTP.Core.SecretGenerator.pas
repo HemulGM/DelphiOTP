@@ -6,16 +6,12 @@ uses
   OTP.Contract.Core.SecretGenerator;
 
 type
-
   TOTPSecretGenerator = class(TInterfacedObject, IOTPSecretGenerator)
   private
-    { private declarations }
     FKeyLength: Word;
   protected
-    { protected declarations }
     constructor Create;
   public
-    { public declarations }
     function SetKeyLength(AKeyLength: Word): IOTPSecretGenerator;
     function Generate: string;
     class function New: IOTPSecretGenerator;
@@ -26,10 +22,7 @@ implementation
 { TOTPSecretGenerator }
 
 uses
-  System.SysUtils,
-  System.Hash,
-  OTP.Consts,
-  Codec.Base32;
+  System.SysUtils, System.Hash, OTP.Consts, OTP.Helper.Base32;
 
 function TOTPSecretGenerator.Generate: string;
 begin
@@ -53,3 +46,4 @@ begin
 end;
 
 end.
+

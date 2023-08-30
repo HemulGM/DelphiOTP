@@ -3,14 +3,7 @@ unit OTP.Helper.ArrayBytes;
 interface
 
 type
-
   TArrayByteHelper = record helper for TArray<Byte>
-  private
-    { private declarations }
-  protected
-    { protected declarations }
-  public
-    { public declarations }
     function Reverse: TArray<Byte>;
     function FromInt64(AValue: Int64): TArray<Byte>;
   end;

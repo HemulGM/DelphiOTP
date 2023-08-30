@@ -2,12 +2,6 @@
 
 A Delphi library for generating one-time passwords according to RFC 4226 (HOTP Algorithm) and RFC 6238 (TOTP Algorithm).
 
-## ⚙️ Installation
-Installation is done using the [`boss install`](https://github.com/HashLoad/boss) command:
-``` sh
-boss install https://github.com/CarlosHe/otp
-```
-
 ## ⚡️ Generate a new secret
 ```delphi
 uses
@@ -32,6 +26,7 @@ var
 begin
   LToken := TOTPCalculator.New
     .SetSecret('MYSECRETBASE32')
+    .SetAlgorithm(TAlgorithm.SHA1) //sha1, sha2*, md5
     .Calculate;
 end.
 ```
@@ -51,3 +46,12 @@ begin
   .Validate;
 end.
 ```
+
+
+<hr>
+<p align="center">
+<img src="https://dtffvb2501i0o.cloudfront.net/images/logos/delphi-logo-128.webp" alt="Delphi">
+</p>
+<h5 align="center">
+Made with :heart: on Delphi
+</h5>

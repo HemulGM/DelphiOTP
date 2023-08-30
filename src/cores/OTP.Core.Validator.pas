@@ -3,25 +3,20 @@ unit OTP.Core.Validator;
 interface
 
 uses
-  OTP.Contract.Core.Validator,
-  OTP.Contract.Core.Calculator;
+  OTP.Contract.Core.Validator, OTP.Contract.Core.Calculator;
 
 type
-
   TOTPValidator = class(TInterfacedObject, IOTPValidator)
   private
-    { private declarations }
     [weak]
     FOTPCalculator: IOTPCalculator;
     FKeyRegeneration: Integer;
     FWindowSize: Word;
     FToken: UInt32;
   protected
-    { protected declarations }
     constructor Create(const AOTPCalculator: IOTPCalculator);
     function IsValidToken: Boolean;
   public
-    { public declarations }
     function SetKeyRegeneration(const AKeyRegeneration: Integer): IOTPValidator;
     function SetWindowSize(const AWindowSize: Word): IOTPValidator;
     function SetToken(const AToken: UInt32): IOTPValidator;
@@ -32,10 +27,7 @@ type
 implementation
 
 uses
-  System.SysUtils,
-  System.DateUtils,
-  OTP.Consts,
-  OPT.Exception.InvalidToken,
+  System.SysUtils, System.DateUtils, OTP.Consts, OPT.Exception.InvalidToken,
   OTP.Resource.Exception;
 
 { TOTPValidator }
@@ -49,13 +41,11 @@ begin
   LTime := DateTimeToUnix(Now, False) div FKeyRegeneration;
   FOTPCalculator.SetKeyRegeneration(FKeyRegeneration).SetCounter(LTime);
   for LTestValue := LTime - FWindowSize to LTime + FWindowSize do
-  begin
-    if (FOTPCalculator.SetCounter(LTestValue).Calculate = FToken) then
+    if FOTPCalculator.SetCounter(LTestValue).Calculate = FToken then
     begin
       Result := True;
       Break;
     end;
-  end;
 end;
 
 constructor TOTPValidator.Create(const AOTPCalculator: IOTPCalculator);
@@ -95,3 +85,4 @@ begin
 end;
 
 end.
+

@@ -7,6 +7,7 @@ const
   KEY_REGENERATION = 30;
   SECRET_LENGTH = 20;
   WINDOW_SIZE = 4;
+  OTP_SCHEME = 'otpauth';
 
 implementation
 
