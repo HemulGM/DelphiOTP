@@ -56,6 +56,9 @@ procedure TOTPAuthURL.DecomposeURI(const AURIStr: string; ARaiseNoSchema: Boolea
 begin
   var URI := TURI.Create(TNetEncoding.URL.Decode(AURIStr));
 
+  if URI.Scheme.ToLower <> OTP_SCHEME then
+    raise Exception.Create('Invalid URI');
+
   //auth type
   if URI.Host.ToLower = 'totp' then
     FAuthType := TAuthType.TOTP
